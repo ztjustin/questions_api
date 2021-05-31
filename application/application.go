@@ -12,10 +12,11 @@ var (
 )
 
 func StartApplication() {
-	userHandler := http.NewUserHandler(user_service.NewService(user_repo.NewUserRestUserRepository()))
+	userHandler := http.NewUserHandler(user_service.NewService(user_repo.NewUserRepository()))
 
 	router.GET("/users", userHandler.GetAll)
-
+	router.GET("/users/:id_user", userHandler.FindById)
+	router.POST("/users/create", userHandler.Create)
 	router.Run()
 
 }
